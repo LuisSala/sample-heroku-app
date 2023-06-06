@@ -28,7 +28,14 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 const config = parse(process.env.DATABASE_URL);
-config.ssl = { rejectUnauthorized: false };
+// Check if USE_SSL environment variable is set. If it is, we need to
+// configure the client to use SSL.
+if (!process.env.DISABLE_SSL) {
+  config.ssl = { rejectUnauthorized: false };
+  console.log('SSL is enabled');
+} else {
+  console.log('SSL is disabled');
+}
 const client = new Client(config);
 const PORT = process.env.PORT || 8080;
 /**
