@@ -32,9 +32,9 @@ const config = parse(process.env.DATABASE_URL);
 // configure the client to use SSL.
 if (!process.env.DISABLE_SSL) {
   config.ssl = { rejectUnauthorized: false };
-  console.log('SSL is enabled');
+  console.log('SSL connections to the DB are enabled');
 } else {
-  console.log('SSL is disabled');
+  console.log('SSL connections to the DB are disabled');
 }
 const client = new Client(config);
 const PORT = process.env.PORT || 8080;
